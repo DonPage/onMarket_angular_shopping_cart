@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/service.js"></script>
+
+</head>
+<body ng-app="shoppingApp">
+
+<div class="everything-wrapper" ng-controller="shoppingList">
+
+
+    <div class="overlay ">
+        <div class="cart">
+            <div class="cart-header clear">
+                <h3 class="heading">Cart</h3>
+                <button class="close close-mod">X</button>
+            </div>
+            <div class="cart-items-wrapper">
+
+
+                <div class="cart-item clear" ng-repeat="item in cartArray track by $index">
+                    <!--<img src="http://placehold.it/204x214">-->
+                    <img src="{{ item.itemImg }}"/>
+
+
+                    <div class="cart-item-info">
+                        <h3 class="cap">{{ item.itemName }}</h3>
+                        <button ng-click="removeItemFromCart($index)" class="remove-item">x</button>
+
+                        <p>${{ item.itemPrice }}</p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="cart-info">
+                <p>Total Items: {{ cartArray.length }}</p>
+
+                <p>Total Cost: ${{ totalAmount }}</p>
+                <button class="check-out">Check Out</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay2">
+        <div class="cart">
+            <div class="cart-header clear">
+                <h3 class="heading">Add Item to Shop</h3>
+                <button class="close close-add-mod">X</button>
+            </div>
+            <div class="add-items-wrapper">
+
+                <div class="cart-item clear">
+                    <!--<img src="http://placehold.it/204x214">-->
+                    <img src="{{ picInput }}"/>
+
+
+                    <div class="cart-item-info">
+                        <h3>{{ nameInput }}</h3>
+                        <p>${{ priceInput }}</p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <form ng-submit="addItemToShop(nameInput, priceInput, picInput)" class="cart-info">
+
+                <label for="addItemName">Name</label>
+                <input pattern=".{1,80}" ng-model="nameInput" id="additemname" autofocus required/>
+                <label for="addItemPrice">Price</label>
+                <input pattern="[-+]?[0-9]*[.,]?[0-9]+" ng-model="priceInput" id="addItemPrice" required/>
+                <label for="addItemPic">Picture</label>
+                <input ng-model="picInput" id="addItemPic" placeholder="url"/>
+
+                <button type="submit" class="add-item">Add Item</button>
+            </form>
+        </div>
+    </div>
+
+    <header>
+        <nav class="clear">
+            <div class="logo-wrapper">
+                <h1>onMarket</h1>
+            </div>
+            <ul class="nav-wrapper">
+                <li><a href="#">Clothes</a></li>
+                <li><a class="active" href="">Food</a></li>
+                <li><a href="#">Electronics</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="content-header clear">
+            <h3>Food</h3>
+            <button class="open-cart">
+                <img src="css/shopping-cart.svg">
+            </button>
+            <button class="add-item-to-shop">+
+            </button>
+        </div>
+        <div id="fixed-nav" class="content-header clear">
+            <h3>Food</h3>
+            <button class="open-cart">
+                <img src="css/shopping-cart.svg">
+            </button>
+            <button class="add-item-to-shop">+
+            </button>
+        </div>
+        <div class="breadcrumbs">
+            <p><a class="home-link" href="#">Home</a> > <a class="" href="#">Food</a></p>
+        </div>
+
+
+        <div class="item-wrapper clear" ng-repeat="item in itemsArray track by $index">
+            <div class="item-image-wrap">
+                <!--<img src="http://placehold.it/204x214">-->
+                <img src="{{ item.itemImg }}"/>
+            </div>
+            <div class="item-desc-wrap clear">
+                <p class="cap"> {{ item.itemName }}  <span class="itemAmount">x{{ item.itemAmount }}</span> </p>
+                <button ng-click="addItemToCart($index)" class="add-to-cart">+ </button>
+                <span>${{ item.itemPrice }}</span>
+            </div>
+        </div>
+
+
+    </div>
+
+<footer>
+    <p>onMarket | @DonRPage</p>
+</footer>
+</div>
+<!-- Everything Wrapper-->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/side.js"></script>
+
+</body>
+</html>
